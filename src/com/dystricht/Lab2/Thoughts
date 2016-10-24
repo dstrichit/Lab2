@@ -1,0 +1,2 @@
+//Accelerations is always positive in GravSystem.computeAcceleration();
+//Figure out how to subtract acceleration... what pulls X back towards Earth, Y back towards earth... abs() problem?
