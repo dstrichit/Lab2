@@ -1,3 +1,9 @@
 //Accelerations is always positive in GravSystem.computeAcceleration();
 //Figure out how to subtract acceleration... what pulls X back towards Earth, Y back towards earth... abs() problem?'
 //******resolved but leaving this here for future reference******
+
+Fixing the strange movements/unwanted velocities:
+
+Each body has horizontal acceleration at the start
+we iterate through each body and calculate acceleration caused by all other bodies
+THE PROBLEM ARISES in that the next body in the timestep has it's acceleration calculated BASED ON the last body's.

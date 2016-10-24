@@ -8,7 +8,7 @@ import edu.princeton.cs.introcs.StdDraw;
 public class EarthMoon {
 
 	public static final double WIDTH = 400, HEIGHT = 400, CENX = WIDTH/2, CENY = HEIGHT/2;
-	public static boolean running = true;
+	public static boolean running = true, first = true;
 	
 	public static final double pixelsPerMeter = (double)3/1e7;
 	
@@ -41,23 +41,9 @@ public class EarthMoon {
 				continue;
 			}
 			StdDraw.enableDoubleBuffering();
-			StdDraw.clear(StdDraw.BLACK);
+			//StdDraw.clear(StdDraw.BLACK);
 			lunarSys.update(timestep);
 			lunarSys.draw(CENX, CENY, pixelsPerMeter);
-			
-			
-/*			{
-				checkX = lunarSys.bodies.get(1).scaleXandY(pixelsPerMeter)[0];
-			checkY = lunarSys.bodies.get(1).scaleXandY(pixelsPerMeter)[1];
-			aX = lunarSys.bodies.get(1).vx;
-			aY = lunarSys.bodies.get(1).vy;
-			
-			System.out.println("X: " + checkX);
-			System.out.println("Y: " + checkY);
-			System.out.println("X Velocity: " + aX);
-			System.out.println("Y Velocity: " + aY);
-			System.out.println();
-			}*/
 			
 			if(CENX + lunarSys.bodies.get(1).scaleXandY(pixelsPerMeter)[0] < CENX - 100){
 				//System.out.println("left side of screen");

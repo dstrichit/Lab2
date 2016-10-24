@@ -12,6 +12,7 @@ public class Body {
 	int radius;
 	private Color color;
 	public String name = "";
+	private double[] acceleration = new double[2];
 	
 	public Body(double iMass, double startX, double startY, double iVX, double iVY, int pixelRadius, int r, int g, int b){
 		
@@ -30,8 +31,10 @@ public class Body {
 		
 	}
 	public void updateVelocity(double ax, double ay, double timestep){
-		vx += ax * timestep;
-		vy += ay * timestep;
+//		vx += ax * timestep;
+//		vy += ay * timestep;
+		vx += acceleration[0] * timestep;
+		vy += acceleration[1] * timestep;
 	}
 	public void draw(double cx, double cy, double pixelsPerMeter){
 		
@@ -54,5 +57,11 @@ public class Body {
 		
 		double scaledPos[] = { x * pixelsPerMeter, y * pixelsPerMeter};
 		return scaledPos;
+	}
+	
+	public void setAccel(double[] newAccels){
+		
+		acceleration[0] = newAccels[0];
+		acceleration[1] = newAccels[1];
 	}
 }
