@@ -30,7 +30,7 @@ public class Body {
 		y += vy*timestep;
 		
 	}
-	public void updateVelocity(double ax, double ay, double timestep){
+	public void updateVelocity(double timestep){
 //		vx += ax * timestep;
 //		vy += ay * timestep;
 		vx += acceleration[0] * timestep;

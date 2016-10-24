@@ -18,13 +18,9 @@ public class GravitationalSystem {
 	}
 
 	public void update(double timestep) {
-
-		//Contains aX and aY for each body, to be used only after acquiring all accelerations
-		double[][] accels = new double[bodies.size()][2];
 		
 		// find acceleration of Body a caused by (all other)Body b, for each
 		// Body a.
-		int i = 0;
 		for (Body a : bodies) {
 
 			for (Body b : bodies) {
@@ -39,16 +35,14 @@ public class GravitationalSystem {
 					//accels[i] = computeAcceleration(a, b);
 					
 					a.setAccel(computeAcceleration(a, b));
-					i++;
 					
 				}
 
 			}
 		}
 		
-		i=0;
 		for (Body a : bodies){
-			a.updateVelocity( (accels[i][0]), (accels[i][1]), timestep);
+			a.updateVelocity(timestep);
 			a.updatePosition(timestep);
 		}
 	}
