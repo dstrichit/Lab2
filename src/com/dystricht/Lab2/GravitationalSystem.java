@@ -24,7 +24,7 @@ public class GravitationalSystem {
 		for (Body a : bodies) {
 
 			double[] totalAccels = new double[2];
-			//a.setAccel();
+			//a.setAccelZero();
 
 			for (Body b : bodies) {
 				// make sure no bodies affect their own velocity.

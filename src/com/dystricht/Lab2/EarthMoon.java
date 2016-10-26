@@ -50,7 +50,7 @@ public class EarthMoon {
 			StdDraw.enableDoubleBuffering();
 			if (clear == true) StdDraw.clear(StdDraw.BLACK);
 			for(Body b : lunarSys.bodies){
-				//b.setAccel();
+				b.setAccelZero();
 			}
 			lunarSys.update(timestep);
 			lunarSys.draw(CENX, CENY, pixelsPerMeter);

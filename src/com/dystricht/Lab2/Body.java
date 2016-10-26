@@ -71,7 +71,7 @@ public class Body {
 		acceleration[0] += newAccels[0];
 		acceleration[1] += newAccels[1];
 	}
-	public void setAccel(){
+	public void setAccelZero(){
 		acceleration[0] = 0;
 		acceleration[1] = 0;
 	}
