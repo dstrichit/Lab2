@@ -7,7 +7,7 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class EarthMoon {
 
-	public static final double WIDTH = 400, HEIGHT = 400, CENX = WIDTH/2, CENY = HEIGHT/2;
+	public static final double WIDTH = 1200, HEIGHT = 1200, CENX = WIDTH/2, CENY = HEIGHT/2;
 	public static boolean running = true,
 			clear = false;
 	
@@ -24,12 +24,19 @@ public class EarthMoon {
 		double earthx = 0.0, earthy = 0.0, moonx = 3.844e8;
 		int earthpix = 30; int moonpix = 6;
 		double earthDown = -12.5709, moonUp = 1022;
-		Body earth = new Body(earthMass, earthx, earthy, 0, earthDown, earthpix, 0, 30, 255 );
-		Body moon  = new Body(moonMass, moonx, 0, 0, moonUp, moonpix, 128, 128, 128);
 		
+		Body earth = new Body(earthMass, earthx, earthy, 0, earthDown, earthpix, 0, 30, 255 );
+		Body moon  = new Body(moonMass, moonx, 0, 500, moonUp, moonpix, 128, 128, 128);
+		//earth.toggleStaticPlanet();
+		
+		//Body moon2 = new Body(moonMass, -moonx, 0, 500, -moonUp, moonpix, 128, 128, 128);
 		ArrayList<Body> earthmoon = new ArrayList<Body>();
 		earthmoon.add(earth); earthmoon.add(moon);
+		//earthmoon.add(moon2);
+		
 		earthmoon.get(0).setName("earth"); earthmoon.get(1).setName("moon");
+		//earthmoon.get(2).setName("second moon");
+		
 		GravitationalSystem lunarSys = new GravitationalSystem(earthmoon);
 		
 		double timestep = (double)1000000/30;
@@ -51,7 +58,7 @@ public class EarthMoon {
 			}
 		
 			StdDraw.show();
-			StdDraw.pause(20);		
+			StdDraw.pause(30);		
 			//running = false;
 		}
 		

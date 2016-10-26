@@ -23,25 +23,35 @@ public class GravitationalSystem {
 		// Body a.
 		for (Body a : bodies) {
 
+			double[] totalAccels = new double[2];
+			//a.setAccel();
+
 			for (Body b : bodies) {
 				// make sure no bodies affect their own velocity.
 				if (b.equals(a)) {
 					continue;
 				} else {
-							//compute gravitational effects from every other body
-					//double[] accelerations = computeAcceleration(a, b); //OLD way of updating accelerations
-					//System.out.println("we're accelerating");
 					
-					//accels[i] = computeAcceleration(a, b);
+					System.out.println("Calculated acceleration of Body "
+							+ a.name + " by Body " + b.name);
+					//totalAccels[0]
+					
+					//totalAccels = computeAcceleration(a, b);
 					
 					a.setAccel(computeAcceleration(a, b));
 					
+					//compute gravitational effects from every other body
+					//double[] accelerations = computeAcceleration(a, b); //OLD way of updating accelerations
+					//System.out.println("we're accelerating");
+					
+					//accels[i] = computeAcceleration(a, b);	
 				}
-
+				
 			}
 		}
 		
 		for (Body a : bodies){
+			System.out.println("Adding accelerations to " + a.name);
 			a.updateVelocity(timestep);
 			a.updatePosition(timestep);
 		}
@@ -67,15 +77,10 @@ public class GravitationalSystem {
 //		double distX = Math.abs(a.x - b.x);
 //		double distY = Math.abs(a.y - b.y); // distance WRT x and y (distance is
 											// abs value)
-		double acceleration = (GRAVCONST * b.mass) / Math.pow(distance, 2); // formula
-																			// for
-																			// acceleration
-																			// of
-																			// one
-																			// body
-																			// by
-																			// another
-
+		
+		//formula for acceleration of one body by another
+		double acceleration = (GRAVCONST * b.mass) / Math.pow(distance, 2);
+		
 		double ax = -(acceleration * distX) / distance; // acceleration with
 														// respect to X
 		double ay = -(acceleration * distY) / distance; // acceleration with
