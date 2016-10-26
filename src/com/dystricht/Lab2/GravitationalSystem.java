@@ -38,7 +38,7 @@ public class GravitationalSystem {
 					
 					//totalAccels = computeAcceleration(a, b);
 					
-					a.setAccel(computeAcceleration(a, b));
+					a.addAccel(computeAcceleration(a, b));
 					
 					//compute gravitational effects from every other body
 					//double[] accelerations = computeAcceleration(a, b); //OLD way of updating accelerations

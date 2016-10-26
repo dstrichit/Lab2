@@ -66,10 +66,10 @@ public class Body {
 		return scaledPos;
 	}
 	
-	public void setAccel(double[] newAccels){
+	public void addAccel(double[] newAccels){
 		
-		acceleration[0] = newAccels[0];
-		acceleration[1] = newAccels[1];
+		acceleration[0] += newAccels[0];
+		acceleration[1] += newAccels[1];
 	}
 	public void setAccel(){
 		acceleration[0] = 0;

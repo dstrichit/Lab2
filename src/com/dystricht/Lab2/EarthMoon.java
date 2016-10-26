@@ -27,7 +27,7 @@ public class EarthMoon {
 		
 		Body earth = new Body(earthMass, earthx, earthy, 0, earthDown, earthpix, 0, 30, 255 );
 		Body moon  = new Body(moonMass, moonx, 0, 500, moonUp, moonpix, 128, 128, 128);
-		//earth.toggleStaticPlanet();
+		earth.toggleStaticPlanet();
 		
 		//Body moon2 = new Body(moonMass, -moonx, 0, 500, -moonUp, moonpix, 128, 128, 128);
 		ArrayList<Body> earthmoon = new ArrayList<Body>();
@@ -49,6 +49,9 @@ public class EarthMoon {
 			}
 			StdDraw.enableDoubleBuffering();
 			if (clear == true) StdDraw.clear(StdDraw.BLACK);
+			for(Body b : lunarSys.bodies){
+				//b.setAccel();
+			}
 			lunarSys.update(timestep);
 			lunarSys.draw(CENX, CENY, pixelsPerMeter);
 			
