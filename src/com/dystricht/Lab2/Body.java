@@ -28,8 +28,6 @@ public class Body {
 	public void updatePosition(double timestep){
 		
 		if(this.staticPlanet == true){
-			x = 0;
-			y = 0;
 			return;
 		}
 		

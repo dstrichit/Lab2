@@ -23,7 +23,8 @@ public class GravitationalSystem {
 		// Body a.
 		for (Body a : bodies) {
 
-			double[] totalAccels = new double[2];
+			double[] totalAccels = {0, 0}, 
+					adder = new double[2];
 			//a.setAccelZero();
 
 			for (Body b : bodies) {
@@ -32,13 +33,14 @@ public class GravitationalSystem {
 					continue;
 				} else {
 					
-					System.out.println("Calculated acceleration of Body "
-							+ a.name + " by Body " + b.name);
+					//System.out.println("Calculated acceleration of Body " + a.name + " by Body " + b.name);
 					//totalAccels[0]
 					
-					//totalAccels = computeAcceleration(a, b);
+					adder = computeAcceleration(a, b);
 					
-					a.addAccel(computeAcceleration(a, b));
+					totalAccels = adder;
+					
+					//a.addAccels(computeAcceleration(a, b));
 					
 					//compute gravitational effects from every other body
 					//double[] accelerations = computeAcceleration(a, b); //OLD way of updating accelerations
@@ -47,6 +49,7 @@ public class GravitationalSystem {
 					//accels[i] = computeAcceleration(a, b);	
 				}
 				
+				a.addAccel(adder);
 			}
 		}
 		
