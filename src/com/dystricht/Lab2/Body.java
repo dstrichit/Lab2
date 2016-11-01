@@ -5,7 +5,7 @@ import java.awt.Color;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Body {
-	
+
 	double mass;
 	double x, y;
 	double vx, vy;
@@ -13,56 +13,77 @@ public class Body {
 	private Color color;
 	public String name = "";
 	private double[] acceleration = new double[2];
-	
-	public Body(double iMass, double startX, double startY, double iVX, double iVY, int pixelRadius, int r, int g, int b){
-		
+	public boolean isStatic = false;
+
+	public Body(double iMass, double startX, double startY, double iVX, double iVY, int pixelRadius, int r, int g,
+			int b) {
+
 		mass = iMass;
-		x = startX; y = startY;
-		vx = iVX; vy = iVY;
+		x = startX;
+		y = startY;
+		vx = iVX;
+		vy = iVY;
 		radius = pixelRadius;
 		color = new Color(r, g, b);
-		
+
 	}
-	
-	public void updatePosition(double timestep){
-		
-		x += vx*timestep;
-		y += vy*timestep;
-		
+
+	public void updatePosition(double timestep) {
+
+		x += vx * timestep;
+		y += vy * timestep;
+
 	}
-	public void updateVelocity(double timestep){
-//		vx += ax * timestep;
-//		vy += ay * timestep;
+
+	public void updateVelocity(double timestep) {
+		// vx += ax * timestep;
+		// vy += ay * timestep;
 		vx += acceleration[0] * timestep;
 		vy += acceleration[1] * timestep;
 	}
-	public void draw(double cx, double cy, double pixelsPerMeter){
-		
+
+	public void draw(double cx, double cy, double pixelsPerMeter) {
+
 		StdDraw.setPenColor(color);
-		double scaledX = x * pixelsPerMeter; double scaledY = y * pixelsPerMeter;
+		double scaledX = x * pixelsPerMeter;
+		double scaledY = y * pixelsPerMeter;
 		StdDraw.filledCircle(cx + scaledX, cy + scaledY, radius);
-		
-	}
-	
-	public String toString(){
-		return this.name;
-		
-	}
-	
-	public void setName(String s){
-		name = s;
-	}
-	
-	public double[] scaleXandY(double pixelsPerMeter){
-		
-		double scaledPos[] = { x * pixelsPerMeter, y * pixelsPerMeter};
-		return scaledPos;
-	}
-	
-	public void setAccel(double[] newAccels){
-		
-		acceleration[0] = newAccels[0];
-		acceleration[1] = newAccels[1];
+
 	}
 
+	public String toString() {
+		return this.name;
+
+	}
+
+	public void setName(String s) {
+		name = s;
+	}
+
+	public double[] scaleXandY(double pixelsPerMeter) {
+
+		double scaledPos[] = { x * pixelsPerMeter, y * pixelsPerMeter };
+		return scaledPos;
+	}
+
+	public void addAccel(double[] newAccels) {
+		this.acceleration[0] += newAccels[0];
+		this.acceleration[1] += newAccels[1];
+	}
+
+	public void setAccelZero() {
+		this.acceleration[0] = 0.0D;
+		this.acceleration[1] = 0.0D;
+	}
+
+	public void findStaticVel() {
+	}
+
+	public void toggleStaticPlanet() {
+		this.isStatic = (!this.isStatic);
+	}
+	
+	public void setColor(Color c){
+		this.color = c;
+	}
 }
