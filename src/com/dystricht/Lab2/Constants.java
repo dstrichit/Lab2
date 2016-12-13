@@ -1,5 +1,9 @@
 package com.dystricht.Lab2;
 
+
+//largely unused class, a late addition
+//used for global program constants
+//will implement these throughout the program later.
 public class Constants
 {
   public static final double AU = 1.49598e11;

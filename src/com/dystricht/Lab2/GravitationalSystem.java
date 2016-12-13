@@ -13,6 +13,7 @@ public class GravitationalSystem {
 
 	public GravitationalSystem(ArrayList<Body> bodyList) {
 
+		//initialize GravSystem with an ArrayList of Bodies
 		bodies = bodyList;
 		for (Body b : this.bodies) {
 			if (b.isStatic) {
@@ -21,22 +22,24 @@ public class GravitationalSystem {
 			}
 		}
 		
-		for(Body b : this.bodies){
-			b.setColor(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
-		}
+//		for(Body b : this.bodies){
+//			b.setColor(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
+//		}
 	}
 
+	//add a body to ArrayList. Goes unused.
 	public void addBody(Body newBody) {
 
 		bodies.add(newBody);
 	}
 
+	//update accelerations
 	public void update(double timestep) {
 
-		// find acceleration of Body a caused by (all other)Body b, for each
-		// Body a.
+		// find acceleration of Body a caused by (all other)Body b, for each Body a.
+		// Utilizes nested forEach loops
 		for (Body a : bodies) {
-
+			//a.setAccelZero();
 			double[] totalAccels = { 0, 0 };
 			double[] adder = new double[2];
 
@@ -46,31 +49,29 @@ public class GravitationalSystem {
 					continue;
 				} else {
 					// compute gravitational effects from every other body
-					// double[] accelerations = computeAcceleration(a, b); //OLD
-					// way of updating accelerations
-					// System.out.println("we're accelerating");
-
-					// accels[i] = computeAcceleration(a, b);
-
-					// a.setAccel(computeAcceleration(a, b));
 
 					adder = computeAcceleration(a, b);
+					totalAccels[0] += adder[0];
+					totalAccels[1] += adder[1];
 
-					totalAccels = adder;
-
-					a.addAccel(adder);
+					//a.addAccel(adder);
 
 				}
 
 			}
+			//add all accels from every body b on a single body a.
+			a.addAccel(totalAccels);
+			//then go to next body a.
 		}
 
+		//update velocity and position after calculating all accelerations
 		for (Body a : bodies) {
 			a.updateVelocity(timestep);
 			a.updatePosition(timestep);
 		}
 	}
 
+	//draw all bodies in ArrayList with respect to Center of screen
 	public void draw(double cx, double cy, double pixelsPerMeter) {
 
 		for (Body b : bodies) {
@@ -86,16 +87,17 @@ public class GravitationalSystem {
 		// distance between bodies
 		double distance = distanceBetween(a, b);
 
+		//if planets are too close, don't calculate accels
+		//prevents extreme accelerations when planets get too close
 		if (distance < 9e7) {
 			return new double[] { 0, 0 };
 		}
 
+		//distance between bodies WRT x & y
 		double distX = a.x - b.x;
 		double distY = a.y - b.y;
-		// double distX = Math.abs(a.x - b.x);
-		// double distY = Math.abs(a.y - b.y); // distance WRT x and y (distance
-		// is
-		// abs value)
+		
+		//total acceleration
 		double acceleration = (GRAVCONST * b.mass) / Math.pow(distance, 2); // formula
 																			// for
 																			// acceleration
@@ -105,11 +107,13 @@ public class GravitationalSystem {
 																			// by
 																			// another
 
+		//acceleration WRT x & y
 		double ax = -(acceleration * distX) / distance; // acceleration with
 														// respect to X
 		double ay = -(acceleration * distY) / distance; // acceleration with
 														// respect to Y
 
+		//returning array of accels to calling function
 		double[] accelerations = { ax, ay };
 
 		return accelerations;
@@ -117,7 +121,8 @@ public class GravitationalSystem {
 	}
 
 	// distance between bodies - the distance formula
-	public double distanceBetween(Body a, Body b) {
+	// useful in several different parts of this program
+	public static double distanceBetween(Body a, Body b) {
 
 		double distance = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 
